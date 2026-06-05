@@ -1,6 +1,7 @@
 import boto3
 import smtplib
 import os
+import json
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from datetime import datetime, timedelta
@@ -15,6 +16,7 @@ GMAIL_USER     = os.getenv('GMAIL_USER')
 GMAIL_PASSWORD = os.getenv('GMAIL_PASSWORD')
 EMAIL_DESTINO  = os.getenv('EMAIL_DESTINO')
 LIMITE_ALERTA  = float(os.getenv('LIMITE_ALERTA', 5.00))
+
 
 def get_custo_aws():
     client = boto3.client(
@@ -61,6 +63,48 @@ def get_custo_aws():
     servicos.sort(key=lambda x: x[1], reverse=True)
     return valor_mes, valor_dia, servicos
 
+
+def gerar_json(valor_mes, valor_dia, servicos, limite):
+    client = boto3.client(
+        'ce',
+        region_name=AWS_REGION,
+        aws_access_key_id=AWS_ACCESS_KEY,
+        aws_secret_access_key=AWS_SECRET_KEY
+    )
+
+    hoje = datetime.today()
+
+    historico_raw = client.get_cost_and_usage(
+        TimePeriod={
+            'Start': (hoje - timedelta(days=180)).strftime('%Y-%m-%d'),
+            'End': hoje.strftime('%Y-%m-%d')
+        },
+        Granularity='MONTHLY',
+        Metrics=['UnblendedCost']
+    )
+
+    historico = []
+    for item in historico_raw['ResultsByTime']:
+        mes = item['TimePeriod']['Start'][:7]
+        valor = float(item['Total']['UnblendedCost']['Amount'])
+        historico.append({'mes': mes, 'valor': valor})
+
+    data = {
+        'valor_mes': valor_mes,
+        'valor_dia': valor_dia,
+        'limite': limite,
+        'atualizado': datetime.today().strftime('%d/%m/%Y %H:%M'),
+        'servicos': [{'nome': s[0], 'valor': s[1]} for s in servicos],
+        'historico': historico
+    }
+
+    os.makedirs('docs', exist_ok=True)
+    with open('docs/data.json', 'w') as f:
+        json.dump(data, f, indent=2)
+
+    print("data.json atualizado!")
+
+
 def enviar_email(assunto, corpo):
     msg = MIMEMultipart()
     msg['From'] = GMAIL_USER
@@ -73,8 +117,11 @@ def enviar_email(assunto, corpo):
         server.sendmail(GMAIL_USER, EMAIL_DESTINO, msg.as_string())
         print(f"Email enviado: {assunto}")
 
+
 def monitorar():
     valor_mes, valor_dia, servicos = get_custo_aws()
+
+    gerar_json(valor_mes, valor_dia, servicos, LIMITE_ALERTA)
 
     hoje = datetime.today().strftime('%d/%m/%Y')
     dia_semana = datetime.today().weekday()
@@ -112,7 +159,7 @@ def monitorar():
         "</style></head><body>"
         "<div class='container'>"
         "<div class='header'>"
-        "<h1>Monitoramento de Custo AWS</h1>"
+        "<h1>AWS Cost Monitor</h1>"
         f"<p>{hoje}</p>"
         "</div>"
         "<div class='body'>"
@@ -152,6 +199,7 @@ def monitorar():
 
     if dia_semana == 6:
         enviar_email(f"Relatorio Semanal AWS - {hoje}", corpo_diario)
+
 
 if __name__ == "__main__":
     monitorar()
