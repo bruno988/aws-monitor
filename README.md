@@ -90,4 +90,9 @@ aws-monitor/
 
 ---
 
+## 🌐 Dashboard
+
+Acesse o dashboard em tempo real:
+https://bruno988.github.io/aws-monitor
+
 Desenvolvido por **Bruno Consani Fernandes** 🚀
