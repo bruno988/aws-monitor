@@ -1,8 +1,42 @@
 {
-  "valor_mes": 0.0,
-  "valor_dia": 0.0,
+  "valor_mes": 5.1e-09,
+  "valor_dia": 4.2e-09,
   "limite": 1.0,
-  "atualizado": "aguardando primeira execucao",
-  "servicos": [],
-  "historico": []
+  "atualizado": "06/06/2026 17:42",
+  "servicos": [
+    {
+      "nome": "EC2 - Other",
+      "valor": 3.708e-07
+    }
+  ],
+  "historico": [
+    {
+      "mes": "2025-12",
+      "valor": 0.0
+    },
+    {
+      "mes": "2026-01",
+      "valor": 0.0
+    },
+    {
+      "mes": "2026-02",
+      "valor": -2e-10
+    },
+    {
+      "mes": "2026-03",
+      "valor": 5e-10
+    },
+    {
+      "mes": "2026-04",
+      "valor": 3e-10
+    },
+    {
+      "mes": "2026-05",
+      "valor": -0.0
+    },
+    {
+      "mes": "2026-06",
+      "valor": 5.1e-09
+    }
+  ]
 }
