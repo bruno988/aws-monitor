@@ -1,12 +1,12 @@
 {
-  "valor_mes": 5.1e-09,
-  "valor_dia": 4.2e-09,
+  "valor_mes": 7.5e-09,
+  "valor_dia": 2.4e-09,
   "limite": 1.0,
-  "atualizado": "06/06/2026 17:42",
+  "atualizado": "07/06/2026 12:24",
   "servicos": [
     {
       "nome": "EC2 - Other",
-      "valor": 3.708e-07
+      "valor": 5.88e-07
     }
   ],
   "historico": [
@@ -36,7 +36,7 @@
     },
     {
       "mes": "2026-06",
-      "valor": 5.1e-09
+      "valor": 7.5e-09
     }
   ]
 }
