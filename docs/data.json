@@ -1,12 +1,12 @@
 {
-  "valor_mes": 6.63e-08,
-  "valor_dia": 4.4e-09,
+  "valor_mes": 7.15e-08,
+  "valor_dia": 4.8e-09,
   "limite": 1.0,
-  "atualizado": "19/06/2026 14:17",
+  "atualizado": "20/06/2026 12:55",
   "servicos": [
     {
       "nome": "EC2 - Other",
-      "valor": 6.468e-07
+      "valor": 6.52e-07
     },
     {
       "nome": "Amazon Simple Storage Service",
@@ -40,7 +40,7 @@
     },
     {
       "mes": "2026-06",
-      "valor": 6.63e-08
+      "valor": 7.15e-08
     }
   ]
 }
