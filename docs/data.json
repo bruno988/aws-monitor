@@ -1,8 +1,8 @@
 {
-  "valor_mes": -8.14e-08,
+  "valor_mes": -8.62e-08,
   "valor_dia": -4.6e-09,
   "limite": 1.0,
-  "atualizado": "18/07/2026 11:57",
+  "atualizado": "19/07/2026 12:02",
   "servicos": [
     {
       "nome": "Amazon Simple Storage Service",
@@ -36,7 +36,7 @@
     },
     {
       "mes": "2026-07",
-      "valor": -8.14e-08
+      "valor": -8.62e-08
     }
   ]
 }
