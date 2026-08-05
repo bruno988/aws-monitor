@@ -1,8 +1,8 @@
 {
-  "valor_mes": -1.44e-08,
+  "valor_mes": -1.92e-08,
   "valor_dia": -4.8e-09,
   "limite": 1.0,
-  "atualizado": "04/08/2026 13:05",
+  "atualizado": "05/08/2026 12:58",
   "servicos": [],
   "historico": [
     {
@@ -31,7 +31,7 @@
     },
     {
       "mes": "2026-08",
-      "valor": -1.44e-08
+      "valor": -1.92e-08
     }
   ]
 }
